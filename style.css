@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: rebeccapurple;
+}
+
+.todo-container {
+  border-radius: 25px;
+  background-color: white;
+  width: 600px;
+  margin: 100px auto;
+  padding: 30px 30px;
+}
+
+.title > h2 {
+  font-size: 30px;
+  color: darkgray;
+  font-family: monospace;
+}
+
+.title > span {
+  font-size: 19px;
+  color: darkgray;
+  font-family: monospace;
+  padding-top: 30px;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: green;
+  font-family: monospace;
+  padding: 20px 20px;
+  margin: 14px 0;
+  border-radius: 5px;
+}
+
+.list-item > div {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  color: #f5f5f56a;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.checked,
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.createdAt {
+  color: darkgray;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.input {
+  outline: 0;
+  border: 0;
+  height: 35px;
+  padding: 28px 28px;
+  border-radius: 10px 0px 0px 10px;
+  width: 100%;
+  font-size: 21px;
+  background-color: black;
+  color: white;
+  font-family: monospace;
+}
+
+.button {
+  outline: 0;
+  background-color: deepskyblue;
+  border: 0;
+  padding: 19px 19px;
+  border-radius: 0px 5px 8px 0px;
+  width: 150px;
+  cursor: pointer;
+  font-size: 16px;
+  border: 2px solid black;
+  font-family: monospace;
+  border: none;
+}
+
+.plus-btn-box {
+  text-align: right;
+}
+
+.plus-btn {
+  outline: 0;
+  font-size: 31px;
+  cursor: pointer;
+  height: 105px;
+  width: 105px;
+  padding: 35px 30px;
+  border-radius: 72px;
+  color: black;
+}
+
+.isChecked {
+  text-decoration: line-through;
+  background-color: rgb(0, 107, 34);
+  color: rgb(169, 1, 1) !important;
+}
+
+.edit-s {
+  color: orange;
+  background-color: rgba(0, 0, 0, 0.708);
+  padding: 4px 7px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.check {
+  background-color: rgba(207, 12, 12, 0.621);
+  color: white;
+  padding: 4px 7px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+.del-s {
+  color: red;
+  background-color: rgba(0, 0, 0, 0.708);
+  padding: 4px 7px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.circle:hover {
+  background-color: red;
+}
+.hidden {
+  display: none;
+}
+.edit-s:hover {
+  background-color: white;
+  border-radius: 5px;
+}
+.del-s:hover {
+  background-color: white;
+  border-radius: 5px;
+}
+.check:hover {
+  background-color: white;
+  border-radius: 5px;
+  color: black;
+}
