@@ -1,107 +1,79 @@
-"use stric";
+// Sana chiqarish funksiyasi
+function showDate() {
+  const now = new Date();
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // Yanvar = 0
+  const year = now.getFullYear();
+  const formatted = `Bugun: ${day}.${month}.${year} yil`;
+  document.getElementById("date-display").textContent = formatted;
+}
 
-let data = [];
-let id = 0;
+// Har safar sahifa ochilganda sanani chiqaradi
+showDate();
 
-// element
-const list = document?.querySelector(".list");
-const form = document?.querySelector(".form");
-let listItme;
-// buttons
-const plusBtn = document?.querySelector(".plus-btn");
-const createBtn = document?.querySelector(".button");
-// input
+// Todo list funksiyalari
+const form = document.getElementById("todo-form");
+const input = document.getElementById("todo-input");
+const list = document.getElementById("todo-list");
 
-const input = document.querySelector(".input");
+let todos = [];
 
-// logics
-// ===============================================
-plusBtn?.addEventListener("click", (e) => {
-  form?.classList.remove("hidden");
-  plusBtn?.classList.add("hidden");
-});
-
-const createElement = () => {
+function renderTodos() {
   list.innerHTML = "";
-  if (data?.length > 0) {
-    data.forEach((d) => {
-      list.insertAdjacentHTML(
-        "afterbegin",
-        `<li class="list-item  ${d.isChecked ? "isChecked" : ""}" data-set="${
-          d?.id
-        }">
-        <span class="check">${d.isChecked ? "CHESKED" : "CHECK"}</span>
-      <p class="name">${d?.listName}</p>
-      <span class="edit-s">Edit</span>
-      <span class="del-s">Del</span>
-      <div class="createdAt"><span>${d?.createdAt}</span></div>
-    </li>`
-      );
-    });
-  }
-};
+  todos.forEach((todo, index) => {
+    const li = document.createElement("li");
+    if (todo.completed) li.classList.add("completed");
 
-createBtn?.addEventListener("click", (e) => {
-  e?.preventDefault();
-  if (id === 0) {
-    const date = new Date();
-    const hour = date.getHours();
-    const listObj = {
-      id: date.getTime(),
-      isChecked: false,
-      listName: input?.value,
-      createdAt: `${Math.abs(hour - 12)}.${
-        date.getMinutes() <= 10 ? 0 + date.getMinutes() : date.getMinutes()
-      } ${hour <= 12 ? "AM" : "PM"}`,
+    const span = document.createElement("span");
+    span.textContent = todo.text;
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = todo.completed;
+    checkbox.onchange = () => {
+      todos[index].completed = !todos[index].completed;
+      renderTodos();
     };
-    data.push(listObj);
-  } else {
-    data = data.map((d) => {
-      if (d.id === id) {
-        return {
-          id: d.id,
-          listName: input.value,
-          isChecked: d.isChecked,
-        };
-      } else {
-        return d;
-      }
-    });
-    id = 0;
-  }
 
-  createElement();
-  input.value = "";
-  form.classList.add("hidden");
-  plusBtn.classList.remove("hidden");
-});
-
-list.addEventListener("click", (e) => {
-  console.log("salom");
-  const target = e.target.classList[0];
-  const dataset = +e.target.parentElement.dataset.set;
-  if (target === "check") {
-    data = data.map((d) => {
-      if (d.id === dataset) {
-        const newObj = {
-          id: d.id,
-          listName: d.listName,
-          createdAt: d.createdAt,
-          isChecked: !d.isChecked,
-        };
-        return newObj;
-      } else {
-        return d;
+    const editBtn = document.createElement("button");
+    editBtn.innerHTML = "✏️";
+    editBtn.onclick = () => {
+      const newText = prompt("Yangi matn:", todo.text);
+      if (newText && newText.trim()) {
+        todos[index].text = newText.trim();
+        renderTodos();
       }
-    });
-    createElement();
-  } else if (target === "del-s") {
-    data = data.filter((d) => d.id !== dataset);
-    createElement();
-  } else if (target === "edit-s") {
-    form?.classList.remove("hidden");
-    plusBtn?.classList.add("hidden");
-    input.value = data.filter((d) => d.id === dataset)[0].listName;
-    id = dataset;
+    };
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "🗑️";
+    deleteBtn.onclick = () => {
+      todos.splice(index, 1);
+      renderTodos();
+    };
+
+    const actions = document.createElement("div");
+    actions.className = "actions";
+    actions.append(editBtn, deleteBtn);
+
+    const left = document.createElement("div");
+    left.style.display = "flex";
+    left.style.alignItems = "center";
+    left.style.gap = "10px";
+    left.append(checkbox, span);
+
+    li.append(left, actions);
+    list.appendChild(li);
+  });
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const text = input.value.trim();
+  if (text) {
+    todos.push({ text, completed: false });
+    input.value = "";
+    renderTodos();
   }
 });
+
