@@ -1,27 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JS in TodoList</title>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div class="todo-container">
-      <div class="title">
-        <h2>Today</h2>
-        <span>November 5, 2023</span>
-      </div>
-      <ul class="list"></ul>
-      <form class="form hidden">
-        <input type="text" class="input" />
-        <button class="button">Create</button>
-      </form>
-      <div class="plus-btn-box">
-        <button class="plus-btn">+</button>
-      </div>
-    </div>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Todo List </title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>📝 Vazifalar Ro'yxati</h1>
+    
+    <div id="date-display" class="date"></div>
 
-    <script src="./index.js"></script>
-  </body>
+    <form id="todo-form">
+      <input type="text" id="todo-input" placeholder="Vazifa kiriting..." required />
+      <button type="submit">Qo'shish</button>
+    </form>
+    <ul id="todo-list"></ul>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
 </html>
